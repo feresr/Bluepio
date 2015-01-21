@@ -21,17 +21,23 @@ public class TweetsAdapter extends BaseAdapter {
     public TweetsAdapter(Context context) {
         super();
         this.context = context;
-        tweets = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return tweets.size();
+        return tweets == null? 0 : tweets.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return tweets.get(position);
+        return tweets == null? null : tweets.get(position);
+    }
+
+    public Tweet getLastTweet() {
+        if (tweets != null && !tweets.isEmpty()) {
+            return tweets.get(tweets.size()-1);
+        }
+        return null;
     }
 
     @Override
@@ -50,7 +56,18 @@ public class TweetsAdapter extends BaseAdapter {
     }
 
     public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
+        if (this.tweets == null) {
+            this.tweets = tweets;
+        } else {
+
+            this.tweets = union(this.tweets, tweets);
+        }
         this.notifyDataSetChanged();
+    }
+
+    private List<Tweet> union(final List<Tweet> list1, final List<Tweet> list2) {
+        final ArrayList<Tweet> result = new ArrayList<>(list1);
+        result.addAll(list2);
+        return result;
     }
 }
