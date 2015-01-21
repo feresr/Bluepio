@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.feresr.bluepio" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -16,10 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.crashlytics.ApiKey"
             android:value="7effea97b70948a407cb20bbbc8643bf36caae5f" />
+
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard" >
+        </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

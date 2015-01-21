@@ -3,34 +3,32 @@ package com.feresr.bluepio;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
 import android.content.Intent;
-import android.widget.Toast;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+import com.twitter.sdk.android.tweetui.TweetUi;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements LogInFragment.LogInCallbacks {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "hDDaQ18flv6z6DPNYSmRyo6cg";
     private static final String TWITTER_SECRET = "D2AKvldeZQ2TK7hjbCSmYcbTZ2jWMa6U1ZglaGyN2JD04M35Hg";
 
+    public static final String USER_ID = "USER_ID";
+    public static final String USER_TOKEN = "USER_TOKEN";
+    public static final String USER_NAME = "USER_NAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
+        Fabric.with(this, new Twitter(authConfig), new TweetUi());
         setContentView(R.layout.activity_main);
     }
 
@@ -66,40 +64,15 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        private TwitterLoginButton loginButton;
-        public PlaceholderFragment() {
-        }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            loginButton = (TwitterLoginButton) rootView.findViewById(R.id.twitter_login_button);
-            loginButton.setCallback(new Callback<TwitterSession>() {
-                @Override
-                public void success(Result<TwitterSession> result) {
-                    // Do something with result, which provides a TwitterSession for making API calls
-                    Toast.makeText(getActivity(), "Authorization succeeded", Toast.LENGTH_SHORT).show();
-                }
+    @Override
+    public void onSuccessfulLogin(TwitterSession session) {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        intent.putExtra(USER_ID, session.getUserId());
+        intent.putExtra(USER_NAME, session.getUserName());
+        intent.putExtra(USER_TOKEN, session.getAuthToken().token);
 
-                @Override
-                public void failure(TwitterException exception) {
-                    Toast.makeText(getActivity(), "Authorization failed :(", Toast.LENGTH_SHORT).show();
-                }
-            });
-            return rootView;
-        }
-
-
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            loginButton.onActivityResult(requestCode, resultCode, data);
-        }
+        startActivity(intent);
     }
 }
 
