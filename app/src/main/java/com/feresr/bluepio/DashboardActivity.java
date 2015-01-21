@@ -8,21 +8,12 @@ import android.view.MenuItem;
 
 public class DashboardActivity extends ActionBarActivity {
 
-    private String userName, userToken;
-    private long userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_dashboard);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            userName = bundle.getString(MainActivity.USER_NAME);
-            userId = bundle.getLong(MainActivity.USER_ID);
-            userToken = bundle.getString(MainActivity.USER_TOKEN);
-        }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

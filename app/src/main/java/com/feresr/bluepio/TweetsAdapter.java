@@ -42,7 +42,7 @@ public class TweetsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = new CompactTweetView(context, (Tweet) getItem(position));
+            convertView = new CompactTweetView(context, (Tweet) getItem(position), R.style.tw__TweetDarkStyle);
         } else {
             ((CompactTweetView) convertView).setTweet((Tweet) getItem(position));
         }

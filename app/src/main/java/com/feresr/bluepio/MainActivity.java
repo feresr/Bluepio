@@ -68,10 +68,6 @@ public class MainActivity extends ActionBarActivity implements LogInFragment.Log
     @Override
     public void onSuccessfulLogin(TwitterSession session) {
         Intent intent = new Intent(this, DashboardActivity.class);
-        intent.putExtra(USER_ID, session.getUserId());
-        intent.putExtra(USER_NAME, session.getUserName());
-        intent.putExtra(USER_TOKEN, session.getAuthToken().token);
-
         startActivity(intent);
     }
 }
