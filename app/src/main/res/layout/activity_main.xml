@@ -6,6 +6,6 @@
         android:id="@+id/login_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.feresr.bluepio.LogInFragment"
+        class="com.feresr.bluepio.login.LogInFragment"
         tools:layout="@layout/fragment_login" />
 </FrameLayout>
