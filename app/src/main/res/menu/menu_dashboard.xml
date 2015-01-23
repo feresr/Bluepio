@@ -4,4 +4,6 @@
     tools:context="com.feresr.bluepio.dashboard.DashboardActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_compose" android:title="@string/action_compose"
+        android:orderInCategory="101" app:showAsAction="ifRoom" />
 </menu>

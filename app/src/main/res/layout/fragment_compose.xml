@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/tweet_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="What's up?"
+        android:maxLength="140" />
+
+    <ImageButton
+        android:id="@+id/add_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="add image"
+        android:src="@android:drawable/ic_input_add" />
+
+    <Button
+        android:id="@+id/tweet_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TWEET" />
+</LinearLayout>

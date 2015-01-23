@@ -39,6 +39,10 @@ public class DashboardActivity extends ActionBarActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
             return true;
         }
+        if (id == R.id.action_compose) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new ComposeFragment()).commit();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
