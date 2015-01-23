@@ -3,11 +3,13 @@ package com.feresr.bluepio.dashboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.feresr.bluepio.EndlessScrollerListener;
+import com.feresr.bluepio.Constants;
+import com.feresr.bluepio.EndlessScrollListener;
 import com.feresr.bluepio.TweetLoader;
 import com.feresr.bluepio.adapters.TweetsAdapter;
 import com.twitter.sdk.android.core.Callback;
@@ -41,7 +43,7 @@ public class HomeFragment extends ListFragment implements TweetLoader {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setListAdapter(adapter);
         if (adapter.getCount() == 0) {
-            loadTweets(10);
+            loadTweets(Constants.TWEET_AMOUNT);
         }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -50,7 +52,7 @@ public class HomeFragment extends ListFragment implements TweetLoader {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((DashboardActivity) getActivity()).getSupportActionBar().setTitle("Home");
-        getListView().setOnScrollListener(new EndlessScrollerListener(this));
+        getListView().setOnScrollListener(new EndlessScrollListener(this));
 
     }
 
@@ -80,7 +82,7 @@ public class HomeFragment extends ListFragment implements TweetLoader {
 
                     @Override
                     public void failure(TwitterException e) {
-
+                        Log.e("ERROR", e.getMessage());
                     }
                 });
     }

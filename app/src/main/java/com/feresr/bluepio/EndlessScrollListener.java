@@ -2,15 +2,12 @@ package com.feresr.bluepio;
 
 import android.widget.AbsListView;
 
-/**
- * Created by fernando.raviola on 1/22/15.
- */
-public class EndlessScrollerListener implements AbsListView.OnScrollListener {
+public class EndlessScrollListener implements AbsListView.OnScrollListener {
 
     private boolean scrolledOut = false;
     private TweetLoader loader;
 
-    public EndlessScrollerListener(TweetLoader loader) {
+    public EndlessScrollListener(TweetLoader loader) {
         this.loader = loader;
     }
 
@@ -19,7 +16,7 @@ public class EndlessScrollerListener implements AbsListView.OnScrollListener {
         if (scrollState == SCROLL_STATE_IDLE && scrolledOut) {
             //load more tweets
             scrolledOut = false;
-            loader.loadTweets(10);
+            loader.loadTweets(Constants.TWEET_AMOUNT);
         }
     }
 
